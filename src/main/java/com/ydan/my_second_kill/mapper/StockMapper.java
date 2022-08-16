@@ -18,11 +18,12 @@ public interface StockMapper {
      * 初始化 DB
      */
     @Update("UPDATE stock SET count = #{count}, sale = 0 WHERE  id=#{id} ")
-    int initDatabaseById(@Param("id") Long id,@Param("count")Long  count);
+    int initDatabaseById(@Param("id") Long id, @Param("count") Long count);
 
 
     /**
      * 通过id查询商品的库存信息
+     *
      * @param id
      * @return
      */
@@ -31,9 +32,10 @@ public interface StockMapper {
 
     /**
      * 秒杀成功,扣减库存
+     *
      * @param id
      * @return
      */
     @Update("UPDATE stock SET count = count - 1, sale = sale + 1 WHERE id = #{id} ")
-    int updateStockById(@Param("id")Long id);
+    int updateStockById(@Param("id") Long id);
 }

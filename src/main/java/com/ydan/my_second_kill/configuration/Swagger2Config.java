@@ -24,8 +24,8 @@ public class Swagger2Config {
      * 指定swagger要扫描的包
      */
     @Bean
-    public Docket getUserDocket(){
-        ApiInfo apiInfo=new ApiInfoBuilder()
+    public Docket getUserDocket() {
+        ApiInfo apiInfo = new ApiInfoBuilder()
                 .title("秒杀系统")//api标题
                 .description("接口描述")//api描述
                 .version("1.0.0")//版本号

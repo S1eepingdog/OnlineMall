@@ -18,18 +18,15 @@ import java.util.Collections;
 @Component
 public class RedisLimit {
 
+    private static final int FAIL_CODE = 0;
+    private static final Integer limit = 5000;
     @Autowired
     RedisPool redisPool;
-
-    private static final int FAIL_CODE = 0;
-
-    private static Integer limit = 5000;
-
 
     /**
      * Redis 限流
      */
-    public  Boolean limit() {
+    public Boolean limit() {
         Jedis jedis = null;
         Object result = null;
         try {
@@ -55,11 +52,12 @@ public class RedisLimit {
 
     /**
      * 进行秒杀,即判断redis库存是否足够,如果足够,则进行库存删减
+     *
      * @param id
      * @return
      */
 
-    public  String secondKillWithRedis(Long id) {
+    public String secondKillWithRedis(Long id) {
         Jedis jedis = null;
         String result = "";
         try {
@@ -70,8 +68,8 @@ public class RedisLimit {
             // 请求限流
 
             // 计数限流
-            result =(String) jedis.eval(script, Collections.singletonList(String.valueOf(1)), Collections.singletonList(String.valueOf(limit)));
-            System.out.println("result"+result);
+            result = (String) jedis.eval(script, Collections.singletonList(String.valueOf(1)), Collections.singletonList(String.valueOf(limit)));
+            System.out.println("result" + result);
             if (!result.equals("")) {
                 log.info("成功获取令牌");
             }
